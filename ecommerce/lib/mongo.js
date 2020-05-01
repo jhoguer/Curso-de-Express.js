@@ -10,9 +10,20 @@ const MONGO_URI = `mongodb+srv://${USER}:${PASSWORD}@${config.dBHost}/${DB_NAME}
 
 class MongoLib {
   constructor() {
-    this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true });
+    // console.log('MONGO_URI', MONGO_URI);
+    this.client = new MongoClient(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     this.dbName = DB_NAME;
   }
+
+  // async connect() {
+  //   try {
+  //   await this.client.connect();
+  //     console.log('MongoDB is Connected!!');
+  //     return this.client.db(this.dbName);
+  //   } catch(err) {
+  //     console.error(err)
+  //   }
+  // }
 
   connect() {
     return new Promise((resolve, reject) => {
