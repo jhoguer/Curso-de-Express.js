@@ -8,6 +8,7 @@ const productService = new ProductService();
 
 router.get('/', async (req, res, next) => {
   const { tags } = req.query;
+  console.log('req', req.query);
 
   try {
     const products = await productService.getProducts({ tags });
@@ -43,10 +44,10 @@ router.post('/', async (req, res, next) => {
   const { body: product } = req;
 
   try {
-    const createProduct = await productService.createProduct({ product });
+    const createdProduct = await productService.createProduct({ product });
   
     res.status(201).json({
-      data: createProduct,
+      data: createdProduct,
       message: 'Product create'
     })
 
