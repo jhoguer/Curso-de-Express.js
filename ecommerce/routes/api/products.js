@@ -23,11 +23,12 @@ router.get('/', async (req, res, next) => {
 
 })
 
-router.get('/:productId', (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
   const { productId } = req.params;
+  console.log('ProductId en routes--------->', productId);
 
   try {
-    const product = productService.getProduct({ productId });
+    const product = await productService.getProduct({ productId });
   
     res.status(200).json({
       data: product,
@@ -42,6 +43,7 @@ router.get('/:productId', (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { body: product } = req;
+  console.log('Del body---------->', product)
 
   try {
     const createdProduct = await productService.createProduct({ product });
