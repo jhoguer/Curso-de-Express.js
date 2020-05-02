@@ -6,9 +6,12 @@ const productsApiRouter = require('./routes/api/products');
 
 const {
   logErrors, 
-  clientErrorHandler, 
-  errorHandler
+  wrapErrors, 
+  errorHandler,
+  clientErrorHandler
 } = require('./utils/middlewares/errorsHandler');
+
+const notFoundHandler = require('./utils/middlewares/notFoundHandler');
 
 // app
 const app = express();
@@ -33,10 +36,14 @@ app.get('/', (req, res) => {
   res.redirect('/products');
 });
 
+// error 404
+app.use(notFoundHandler);
+
 // error handlers
 app.use(logErrors);
-app.use(clientErrorHandler);
+app.use(wrapErrors);
 app.use(errorHandler);
+app.use(clientErrorHandler);
 
 // server
 const server = app.listen(8000, () => {

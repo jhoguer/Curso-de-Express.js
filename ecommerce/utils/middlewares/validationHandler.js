@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+const Boom = require('@hapi/boom');
 
 const validate = (data, schema) => {
   console.log('***************************', data)
@@ -11,7 +12,7 @@ const validationHandler = (schema, check = "body") => {
   return (req, res, next) => {
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<', req[check])
     const error = validate(req[check], schema);
-    error ? next(new Error(error)) : next();
+    error ? next(Boom.badRequest(error)) : next();
   };
 }
 
