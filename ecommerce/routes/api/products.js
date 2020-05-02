@@ -15,7 +15,7 @@ const { productIdSchema,
 require('../../utils/auth/strategies/jwt');
 
 const productApi = (app) => {
-  const router = express().Router();
+  const router = express.Router();
   app.use('/api/products', router);
 
   const productService = new ProductService();
@@ -30,7 +30,7 @@ const productApi = (app) => {
     
       res.status(200).json({
         data: products,
-        message: 'Products listed'
+        message: 'products listed'
       })
     } catch(err) {
       next(err)
