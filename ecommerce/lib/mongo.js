@@ -35,7 +35,7 @@ class MongoLib {
         console.log(error)
       } 
     }
-    console.log('Conexion de la DB MONGO==>', MongoLib.connection);
+    // console.log('Conexion de la DB MONGO==>', MongoLib.connection);
     return MongoLib.connection
   }
 
